@@ -1,3 +1,4 @@
-snowflake==latest
-snowflake-snowpark-python==latest
-streamlit==latest
+streamlit
+snowflake-connector-python
+snowflake-snowpark-python
+snowflake
