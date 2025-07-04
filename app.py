@@ -246,7 +246,8 @@ def main():
         )
 
 def create_snowflake_session():
-    private_key = st.secrets["SNOWFLAKE_PRIVATE_KEY"].encode()
+    #private_key = st.secrets["SNOWFLAKE_PRIVATE_KEY"].encode()
+    private_key = "hola"
     connection_parameters = {
         "account": st.secrets["SNOWFLAKE_ACCOUNT"],
         "user": st.secrets["SNOWFLAKE_USER"],
