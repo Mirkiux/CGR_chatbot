@@ -1,7 +1,6 @@
 import streamlit as st
 from snowflake.core import Root  # requires snowflake>=0.8.0
 from snowflake.snowpark import Session
-import os
 
 
 MODELS = [
@@ -247,15 +246,15 @@ def main():
         )
 
 def create_snowflake_session():
-    private_key = os.environ["SNOWFLAKE_PRIVATE_KEY"].replace("\\n", "\n").encode()
+    private_key = st.secrets["SNOWFLAKE_PRIVATE_KEY"].replace("\\n", "\n").encode()
     connection_parameters = {
-        "account": os.environ["SNOWFLAKE_ACCOUNT"],
-        "user": os.environ["SNOWFLAKE_USER"],
+        "account": st.secrets["SNOWFLAKE_ACCOUNT"],
+        "user": st.secrets["SNOWFLAKE_USER"],
         "private_key": private_key,
-        "role": os.environ.get("SNOWFLAKE_ROLE"),
-        "warehouse": os.environ.get("SNOWFLAKE_WAREHOUSE"),
-        "database": os.environ.get("SNOWFLAKE_DATABASE"),
-        "schema": os.environ.get("SNOWFLAKE_SCHEMA")
+        "role": st.secrets.get("SNOWFLAKE_ROLE"),
+        "warehouse": st.secrets.get("SNOWFLAKE_WAREHOUSE"),
+        "database": st.secrets.get("SNOWFLAKE_DATABASE"),
+        "schema": st.secrets.get("SNOWFLAKE_SCHEMA"),
     }
     return Session.builder.configs(connection_parameters).create()
 
